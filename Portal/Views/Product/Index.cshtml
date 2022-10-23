@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model List<ProductViewModel>
+
+<h1>Product</h1>
+
+<button class="btn btn-primary"><a style="text-decoration: none; color:white;" asp-area="" asp-controller="Product" asp-action="Add">Add</a></button>
+
+<table class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>ContainsAlcohol</th>
+        <th>Pic</th>
+        <th></th>
+    </thead>
+    <tbody>
+        @foreach (var product in @Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.ContainsAlcohol</td>
+                <td>@product.Picture</td>
+                <td><button asp-action="RemoveProduct"  class="btn btn-danger">Delete</button></td>
+            </tr>  
+        }
+    </tbody>
+</table>
+
