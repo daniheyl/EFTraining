@@ -32,10 +32,24 @@ public class ProductController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> RemoveProduct(NewProductViewModel newProduct)
+    public async Task<IActionResult> RemoveProduct(int id)
     {
-        var productToRemove = new Product(newProduct.Name, newProduct.ContainsAlcohol, newProduct.Picture);
-        await _productRepository.RemoveProduct(productToRemove);
+        await _productRepository.RemoveProduct(id);
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> Edit(int id)
+    {
+        Product product = await _productRepository.Get(id);
+        return View(product.ToViewModel());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditProduct(NewProductViewModel newProduct)
+    {
+        var productToEdit = new Product(newProduct.Id, newProduct.Name, newProduct.ContainsAlcohol, newProduct.Picture);
+
+        await _productRepository.EditProduct(productToEdit);
         return RedirectToAction("Index");
     }
 }

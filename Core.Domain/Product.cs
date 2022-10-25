@@ -20,9 +20,21 @@ namespace Core.Domain
         {
         
         }
+        public Product(int id)
+        {
+            id = Id;
+        }
 
         public Product(string name, bool containsAlcohol, string picture) 
         {
+            Name = name;
+            ContainsAlcohol = containsAlcohol;
+            Picture = picture;
+        }
+
+        public Product(int id ,string name, bool containsAlcohol, string picture)
+        {
+            Id = id;
             Name = name;
             ContainsAlcohol = containsAlcohol;
             Picture = picture;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Domain;
 using Core.DomainServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
@@ -27,9 +28,24 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task RemoveProduct(Product removedProduct)
+    
+    public async Task EditProduct(Product Product)
     {
-        _context.Products.Remove(removedProduct);
+        _context.Products.Update(Product);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task RemoveProduct(int id)
+    {
+        var productToRemove = new Product { Id = id }; 
+        _context.Products.Remove(productToRemove);
+        await _context.SaveChangesAsync();
+
+    }
+
+    public async Task<Product> Get(int id)
+    {
+       Product product = await _context.Products.Where(e => e.Id == id).FirstOrDefaultAsync();
+       return product;
     }
 }

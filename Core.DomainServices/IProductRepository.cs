@@ -11,8 +11,12 @@ public interface IProductRepository
 {
     IEnumerable<Product> GetAll();
 
+    Task<Product> Get(int id);
+
     Task AddProduct(Product newProduct);
 
-    Task RemoveProduct(Product removedProduct);
+    Task EditProduct(Product newProduct);
+
+    Task RemoveProduct(int id);
 
 }

@@ -25,7 +25,14 @@
                 <td>@product.Name</td>
                 <td>@product.ContainsAlcohol</td>
                 <td>@product.Picture</td>
-                <td><button asp-action="RemoveProduct"  class="btn btn-danger">Delete</button></td>
+                <td>
+                    <form asp-action="RemoveProduct" asp-route-id="@product.Id" method="post">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@product.Id">
+                        Update
+                    </a>
+                </td>
             </tr>  
         }
     </tbody>
